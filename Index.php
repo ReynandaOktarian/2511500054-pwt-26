@@ -1,14 +1,15 @@
-<?php
-session_start();
-require_once ("config/koneksi.php");
-if(isset($_SESSION['Username']) && $_SESSION['Role'] == 'admin') {
-?>
 
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+<?php
+  session_start();
+  require_once("config/koneksi.php");
+  if(!isset($_SESSION["Username"]))
+?>
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -64,101 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </li>
 
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -179,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block"><?php echo $_SESSION['Username']; ?></a>
         </div>
       </div>
 
@@ -200,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -208,26 +115,91 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-
-             
-
+          
             <ul class="nav nav-treeview">
+              <?php if($_SESSION['Role']=='admin'){ ?>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Guru</p>
+                <li class="nav-item">
+                <a href="guru.php" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Guru</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Siswa</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+                </li>
 
- <li class="nav-item menu-open">
+              <li class="nav-item">
+              <a href="siswa.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Siswa</p>
+              </a>
+              </li>
+
+            <li class="nav-item">
+            <a href="mapel.php" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>Mapel</p>
+            </a>
+            </li>
+
+            <li class="nav-item">
+            <a href="jadwal.php" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>Jadwal</p>
+            </a>
+            </li>
+            </ul>
+
+            <?php } ?>
+            
+              <?php if($_SESSION['Role']=="guru"){ ?>
+
+              <li class="nav-item">
+              <a href="profil.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Profil</p>
+              </a>
+              </li>
+
+              <li class="nav-item">
+              <a href="kelas.php" class="nav-link">
+              <i class="nav-icon fas fa-class"></i>
+              <p>Kelas</p>
+              </a>
+              </li>
+
+              <li class="nav-item">
+              <a href="jadwal.php" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>Jadwal</p>
+              </a>
+              </li>
+              </ul>
+
+              <?php } ?>
+
+              <?php if($_SESSION['Role']=="siswa"){ ?>
+
+              <li class="nav-item">
+              <a href="profil.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Profil</p>
+              </a>
+              </li>
+
+              <li class="nav-item">
+              <a href="jadwal.php" class="nav-link">
+              <i class="nav-icon fas fa-calendar"></i>
+              <p>Jadwal</p>
+              </a>
+              </li>
+              </ul>
+
+              <?php } ?>
+
+              <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -244,13 +216,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-
-
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-              logout
+                Logout
               </p>
             </a>
           </li>
@@ -285,24 +255,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Dashboard</h5>
 
                 <p class="card-text">
-                  Firefly is my Beutiful wife, and I love her so much. I am so lucky to have her in my life. She is the most beautiful
+                  Selamat datang di website kampus
                 </p>
 
+              
               </div>
             </div>
 
-           
-          
-
-           
-
-               
+            
               </div>
             </div>
           </div>
@@ -348,7 +314,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </body>
 </html>
 <?php
-} else {
-  echo "<script>alert('Anda tidak memiliki akses ke halaman ini!'); window.location='login.php';</script>";
-}
+header("location:login.php");
 ?>
