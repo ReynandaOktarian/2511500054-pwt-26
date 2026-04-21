@@ -2,7 +2,6 @@
   session_start();
   include "config/koneksi.php";
 
-  // PROSES PHP DIPINDAH KE ATAS AGAR TIDAK ERROR HEADERS ALREADY SENT
   if(isset($_POST['login'])) {
       $Username = $_POST['Username'];
       $Password = $_POST['Password'];
@@ -10,23 +9,21 @@
       if(empty($Username) || empty($Password)) {
           $error = "Data Tidak Boleh kosong!";
       } else {
-          // Cari data user di database
           $query = mysqli_query($koneksi, "SELECT * FROM users WHERE Username = '$Username' AND Password = '$Password' ");
           $userquery = mysqli_fetch_array($query);
           
           if($userquery) {
-              // Set Session
-              $_SESSION['Role'] = strtolower($userquery['Role']); // pastikan huruf kecil untuk pengecekan
+              $_SESSION['Role'] = strtolower($userquery['Role']); 
               $_SESSION['Username'] = $Username;
 
-              // CEK PASSWORD DEFAULT GURU
-              if($_SESSION['Role'] == 'guru' && $Password == '1234') {
+              if(($_SESSION['Role'] == 'guru' || $_SESSION['Role'] == 'siswa') && $Password == '1234') {
                   header("location:index.php?page=ganti_password"); 
                   exit();
               } else {
                   header("location:index.php"); 
                   exit();
-              }
+              } 
+
           } else {
               $error = "Login gagal. Username atau password salah!";
           }
