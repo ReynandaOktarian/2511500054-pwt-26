@@ -120,7 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <?php if($_SESSION['Role']=='admin'){ ?>
               <li class="nav-item">
                 <li class="nav-item">
-                <a href="guru.php" class="nav-link">
+                <a href="index.php?page=guru" class="nav-link active">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Guru</p>
                 </a>
@@ -133,12 +133,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
               </li>
 
-            <li class="nav-item">
-            <a href="mapel.php" class="nav-link">
-            <i class="nav-icon fas fa-calendar"></i>
-            <p>Mapel</p>
-            </a>
-            </li>
+              <li class="nav-item">
+              <a href="index.php?page=kelas" class="nav-link active">
+              <i class="nav-icon fas fa-user"></i>
+              <p>kelas</p>
+              </a>
+              </li>
+
+            <li class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="index.php?page=mapel" class="nav-link active">
+                  <i class="far da-circle nav-icon"></i>
+                  <p>Mata Pelajaran</p>
+                </a>
+                </li>
 
             <li class="nav-item">
             <a href="jadwal.php" class="nav-link">
@@ -261,7 +269,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h5 class="card-title">Dashboard</h5>
 
                 <p class="card-text">
-                  Selamat datang di website kampus
+                  <?php
+                  if (isset($_GET["page"])) {
+                    $page = $_GET['page'];
+                  } else {
+                    $page = "";
+                  }
+                  if ($page == "") {
+                    include "page/dashboard.php";
+                  } elseif (!file_exists("page/$page.php")) {
+                    echo "File tidak ditemukan";
+                  } else {
+                    include "page/$page.php";
+                  }
+                  ?>
                 </p>
 
               
