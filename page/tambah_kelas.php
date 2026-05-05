@@ -1,67 +1,39 @@
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Data Kelas</h1>
-            </div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-primary">
+            <div class="card-header"><h3 class="card-title">Tambah Kelas</h3></div>
+            <form method="POST">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Kode Kelas</label>
+                        <input type="text" name="id_kelas" class="form-control" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kelas</label>
+                        <input type="text" name="nm_kelas" class="form-control" required>
+                    </div>
+                    <div class="card-footer">
+                    <button type="submit" name="simpan" class="btn btn-success">Simpan</button>
+                    <a href="index.php?page=kelas" class="btn btn-secondary">Kembali</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <?php
-$carikode = mysqli_query($koneksi, "SELECT max(id_kelas) FROM kelas") or die (mysqli_error($koneksi));
-$datakode = mysqli_fetch_array($carikode);
+if (isset($_POST['simpan'])) {
+    $kd = $_POST['id_kelas'];
+    $nm = $_POST['nm_kelas'];
 
-if($datakode && $datakode[0] != null) {
-    $nilaikode = substr($datakode[0], 2);
-    $kode = (int) $nilaikode;
-    $kode = $kode + 1;
-    $hasilkode = "M-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
-} else {
-    $hasilkode = "M-001";
-}
-$_SESSION["KODE"] = $hasilkode;
+    $queryKelas = mysqli_query($koneksi, "INSERT INTO kelas VALUES ('$kd', '$nm')");
 
-if(isset($_POST['tambah'])){
-    $id_kelas = $_POST['id_kelas'];
-    $nm_kelas = $_POST['nm_kelas'];
-    $insert = mysqli_query($koneksi, "INSERT INTO kelas (id_kelas, nm_kelas) VALUES ('$id_kelas','$nm_kelas')");
-    
-    if ($insert) {
-        echo '<div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-info"></i> Info </h5>
-        <h4>Berhasil Disimpan</h4></div>';
-        echo '<meta http-equiv="refresh" content="1;url=index.php?page=kelas">';
+    // Perbaikan: $queryGuru sekarang menggunakan huruf 'G' besar sesuai deklarasi di atas
+    if ($queryKelas) {
+        echo "<script>alert('Data Kelas berhasil disimpan'); window.location.href='index.php?page=kelas';</script>";
     } else {
-        echo '<div class="alert alert-warning alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-info"></i> Info </h5>
-        <h4>Gagal Disimpan: ' . mysqli_error($koneksi) . '</h4></div>';
+        // Opsional: Tambahan pesan error untuk memudahkan pencarian bug jika gagal masuk database
+        echo "<script>alert('Gagal menyimpan data!');</script>";
     }
 }
 ?>
-
-<section class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-body p-2">
-                    <form method="POST" action="">
-                        <div class="form-group">
-                            <label for="id_kelas">ID Kelas</label>
-                            <input type="text" name="id_kelas" value="<?= $hasilkode; ?>" class="form-control" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="nm_kelas">Nama Kelas</label>
-                            <input type="text" name="nm_kelas" id="nm_kelas" placeholder="Nomor Kelas" class="form-control" required>
-                        </div>
-                        <div class="card-footer">
-                            <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>

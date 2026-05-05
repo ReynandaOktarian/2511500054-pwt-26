@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 11, 2026 at 06:18 AM
+-- Generation Time: May 05, 2026 at 05:00 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -24,44 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `ekstra2511500054`
 --
 
-CREATE TABLE `users` (
-  `Id_user` int(5) NOT NULL,
-  `Username` varchar(50) NOT NULL,
-  `Password` varchar(225) NOT NULL,
-  `Role` enum('admin','guru','siswa','') NOT NULL
+CREATE TABLE `ekstra2511500054` (
+  `id_ekstra` varchar(5) NOT NULL,
+  `nama_ekstra` varchar(50) NOT NULL,
+  `ket` varchar(20) NOT NULL,
+  `semester` int(5) NOT NULL,
+  `thn_ajaran` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `ekstra2511500054`
 --
 
-INSERT INTO `users` (`Id_user`, `Username`, `Password`, `Role`) VALUES
-(1, 'admin', 'admin', 'admin'),
-(3, 'guru', 'guru', 'guru'),
-(4, 'siswa', 'siswa', 'siswa');
+INSERT INTO `ekstra2511500054` (`id_ekstra`, `nama_ekstra`, `ket`, `semester`, `thn_ajaran`) VALUES
+('1', 'Aec', 'Esport, Mole', 4, '2020/2021');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `ekstra2511500054`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`Id_user`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `Id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `ekstra2511500054`
+  ADD PRIMARY KEY (`id_ekstra`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
