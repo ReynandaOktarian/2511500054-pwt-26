@@ -6,7 +6,6 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>id Ektra</th>
                     <th>Nama Ekstra</th>
                     <th>keterangan</th>
                     <th>Semester</th>
@@ -22,7 +21,6 @@
                 ?>  
                 <tr>
                     <td><?php echo $no++; ?></td>
-                    <td><?php echo $data['id_ekstra']; ?></td>
                     <td><?php echo $data['nama_ekstra']; ?></td>
                     <td><?php echo $data['ket']; ?></td>
                     <td><?php echo $data['semester']; ?></td>

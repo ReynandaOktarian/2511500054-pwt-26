@@ -16,6 +16,10 @@ $data = mysqli_fetch_array($query);
                 <label>Nama Kelas</label>
                 <input type="text" name="nm_kelas" class="form-control" value="<?php echo $data['nm_kelas']; ?>" required>
             </div>
+            <div class="form-group">
+                <label>Nama Kelas</label>
+                <input type="text" name="nm_kelas" class="form-control" value="<?php echo $data['nm_kelas']; ?>" required>
+            </div>
             <button type="submit" name="update" class="btn btn-warning">Update</button>
             <a href="index.php?page=kelas" class="btn btn-secondary">Kembali</a>
         </form>

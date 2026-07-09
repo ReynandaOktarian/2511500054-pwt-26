@@ -12,7 +12,6 @@
       if(empty($PasswordBaru)) {
           $error = "Password baru tidak boleh kosong!";
       } else {
-          // Update password di database users
           $update = mysqli_query($koneksi, "UPDATE users SET Password = '$PasswordBaru' WHERE Username = '$Username'");
           
           if($update) {
